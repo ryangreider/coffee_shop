@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
+  #Items Model
   resources :items
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
   root 'items#index'
   resources :items
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+  #User Model
+  root 'sessions#home'
+  resources :users, only: [:new, :create, :update, :show, :destroy]
+
+  get '/login', 'sessions#login'
+  post '/login', 'sessions#create'
+  post '/logout', 'sessions#destroy'
+  get '/logout', 'sessions#destroy'
 end
