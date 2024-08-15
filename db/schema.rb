@@ -10,7 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_06_214709) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_15_230835) do
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "inventories", force: :cascade do |t|
+    t.integer "item_id", null: false
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_inventories_on_item_id"
+  end
+
   create_table "items", force: :cascade do |t|
     t.string "name"
     t.integer "quantity"
@@ -19,6 +33,32 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_06_214709) do
     t.text "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "category_id"
+    t.integer "supplier_id"
+    t.index ["category_id"], name: "index_items_on_category_id"
+    t.index ["supplier_id"], name: "index_items_on_supplier_id"
   end
 
+  create_table "suppliers", force: :cascade do |t|
+    t.string "name"
+    t.text "contact_info"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  add_foreign_key "inventories", "items"
+  add_foreign_key "items", "categories"
+  add_foreign_key "items", "suppliers"
 end
