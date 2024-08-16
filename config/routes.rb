@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  resources :inventories
-  resources :suppliers
-  resources :categories
   devise_for :users
+  resources :categories
+  resources :suppliers
   resources :items
+  resources :inventories
   root 'items#index'
   
 end
