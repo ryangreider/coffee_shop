@@ -1,0 +1,21 @@
+<h1>Sessions#new</h1>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h2 class="text-center">Login</h2>
+      <%= form_with(url: login_path, local: true, class: 'form-horizontal') do |form| %>
+        <div class="mb-3">
+          <%= form.label :email, class: 'form-label' %>
+          <%= form.email_field :email, class: 'form-control', placeholder: 'Enter email' %>
+        </div>
+        <div class="mb-3">
+          <%= form.label :password, class: 'form-label' %>
+          <%= form.password_field :password, class: 'form-control', placeholder: 'Enter password' %>
+        </div>
+        <div class="mb-3 text-center">
+          <%= form.submit 'Login', class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
