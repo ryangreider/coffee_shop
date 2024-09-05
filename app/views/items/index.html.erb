@@ -67,8 +67,10 @@
   <div class="container p-4">
     <span class="text-muted">© <%= Time.now.year %> True Nectar Coffee</span>
   </div>
+
+  #logout button
   <div class="d-flex justify-content-end mb-3">
-  <%= button_to 'Logout', logout_path, method: :delete, class: 'btn btn-outline-danger' %>
+  <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'btn btn-outline-danger' %>
 </div>
 </footer>
 </html>
