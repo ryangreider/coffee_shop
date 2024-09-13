@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!
+  #before_action :authenticate_user!
   before_action :set_item, only: %i[ show edit update destroy ]
 
   # GET /items or /items.json
@@ -66,6 +66,6 @@ class ItemsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def item_params
-      params.require(:item).permit(:name, :quantity, :category_id, :cost, :supplier_id :note)
+      params.require(:item).permit(:name, :quantity, :category_id, :cost, :supplier_id, :note)
     end
 end

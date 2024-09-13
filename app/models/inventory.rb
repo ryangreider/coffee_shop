@@ -1,3 +1,4 @@
 class Inventory < ApplicationRecord
-  belongs_to :item
+  belongs_to :department
+  has_many :items, dependent: :destroy
 end
