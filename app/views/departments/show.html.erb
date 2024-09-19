@@ -1,13 +1,10 @@
 <h1><%= @department.name %></h1>
 
-<%= link_to 'Add Inventory', new_department_inventory_path(@department) %>
-
+<h2>Items in this Department</h2>
 <ul>
-  <% @inventories.each do |inventory| %>
-    <li>
-      <%= inventory.name %>
-      <%= link_to 'Edit', edit_department_inventory_path(@department, inventory) %> |
-      <%= link_to 'Delete', department_inventory_path(@department, inventory), method: :delete %>
-    </li>
+  <% @department.items.each do |item| %>
+    <li><%= link_to item.name, item_path(item) %></li>
   <% end %>
 </ul>
+
+<%= link_to 'Add New Item', new_item_path %>

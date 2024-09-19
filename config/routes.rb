@@ -9,13 +9,7 @@ Rails.application.routes.draw do
 
   root 'departments#index'
   resources :departments do
-    resources :inventories
-  end
-  
-  resources :inventories do
     resources :items
   end
-
-  
 end
 

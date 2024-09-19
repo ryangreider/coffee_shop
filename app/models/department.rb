@@ -1,4 +1,4 @@
 class Department < ApplicationRecord
-    has_many :inventories, dependent: :destroy
+    has_many :items, dependent: :destroy
     validates :name, presence: true
 end
