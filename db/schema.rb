@@ -10,8 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_15_230835) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_13_091903) do
   create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "departments", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -22,6 +28,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_15_230835) do
     t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "department_id", null: false
+    t.index ["department_id"], name: "index_inventories_on_department_id"
     t.index ["item_id"], name: "index_inventories_on_item_id"
   end
 
@@ -33,8 +41,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_15_230835) do
     t.text "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "category_id"
-    t.integer "supplier_id"
+    t.integer "category_id", default: 1
+    t.integer "supplier_id", default: 1
     t.index ["category_id"], name: "index_items_on_category_id"
     t.index ["supplier_id"], name: "index_items_on_supplier_id"
   end
@@ -58,6 +66,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_15_230835) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "inventories", "departments"
   add_foreign_key "inventories", "items"
   add_foreign_key "items", "categories"
   add_foreign_key "items", "suppliers"
